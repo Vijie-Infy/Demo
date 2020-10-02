@@ -30,12 +30,12 @@ jobs:
 
       - name: Install XUnit
         run: |
-            cd Core-Test-Automation            
+            cd googlesearch/Core-Test-Automation            
             dotnet add package dotnet-xunit --version 2.3.1
         shell: powershell
       - name: dotnet restore and build
         run: |
-            cd Core-Test-Automation            
+            cd googlesearch/Core-Test-Automation            
             dotnet restore
             dotnet build
         shell: powershell
