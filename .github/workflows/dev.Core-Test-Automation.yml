@@ -9,7 +9,7 @@ env:
   Remote: ${{ secrets.USEREMOTE }} # this makes the run to happen in Saucelabs, if not it will run locally (either git or on desktop)
 
 on:
-  - workflow_dispatch
+  workflow_dispatch:
   #workflow_dispatch:
     #inputs:
     #  Solution:
