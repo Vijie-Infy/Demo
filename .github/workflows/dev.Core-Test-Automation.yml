@@ -41,6 +41,7 @@ jobs:
         shell: powershell
       - name: Run Google Search
         run: | #source https://marketplace.visualstudio.com/items?itemName=RamiAbughazaleh.SilverlightProjectSystem
+              cd googlesearch
               dotnet test --no-restore --verbosity normal --filter DisplayName="Google Search"
         shell: powershell
 
