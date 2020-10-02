@@ -1,0 +1,8 @@
+obj/
+packages/
+.vs/
+*.cache
+*.xap
+*.user
+*.vspscc
+Core-Test-Automation/obj/**

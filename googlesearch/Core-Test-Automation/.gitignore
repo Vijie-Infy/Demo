@@ -1,0 +1,9 @@
+bin/
+obj/
+packages/
+.vs/
+*.cache
+*.xap
+*.user
+*.vspscc
+obj/**

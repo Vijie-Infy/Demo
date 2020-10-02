@@ -1,0 +1,48 @@
+name: UAT - Build test automation cases and test
+#env:
+  #DEV_REPO_STORAGE:  ${{ secrets.DEV_REPO_STORAGE }}
+env:
+  PROJECTNAME:  ${{ secrets.PROJECTNAME }}
+  SAUCE_ACCESS_KEY: ${{ secrets.SAULABS_PASSWORD }}
+  SAUCE_USERNAME: ${{ secrets.SAULABS_USERNAME }}
+  TESTPHASENAME: PROD
+  Remote: true # this makes the run to happen in Saucelabs, if not it will run locally (either git or on desktop)
+
+on:
+  - workflow_dispatch
+  #workflow_dispatch:
+    #inputs:
+    #  Solution:
+    #    description: 'TESTPHASENAME'
+    #    required: true
+    #    default: 'UAT'
+  #push:
+  #  branches: [ develop, master ]   
+jobs:
+  Test-Suite-Google-Search:
+    runs-on: windows-latest  # For a list of available runner types, refer to  # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    #needs: MRS-Dev-PreValidation
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+            ref: master
+
+      - name: Install XUnit
+        run: |
+            cd Core-Test-Automation            
+            dotnet add package dotnet-xunit --version 2.3.1
+        shell: powershell
+      - name: dotnet restore and build
+        run: |
+            cd Core-Test-Automation            
+            dotnet restore
+            dotnet build
+        shell: powershell
+      - name: Run Google Search
+        run: | #source https://marketplace.visualstudio.com/items?itemName=RamiAbughazaleh.SilverlightProjectSystem
+              $env:SAUCE_NAME = "Google Search" 
+              dotnet test --no-restore --verbosity normal --filter DisplayName="Google Search"
+        shell: powershell
+
+
